@@ -1,0 +1,1167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>循证医学 - 科学就医的智慧选择</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Space Grotesk", "Noto Sans SC", "sans-serif"],
+              body: ["Noto Sans SC", "sans-serif"],
+              serif: ["Noto Serif SC", "serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+            colors: {
+              base: {
+                50: "#faf9f7",
+                100: "#f0eee9",
+                200: "#e0ddd5",
+                800: "#1a1816",
+                850: "#141210",
+                900: "#0f0d0b",
+                950: "#0a0908",
+              },
+              pri: {
+                50: "#f0eefb",
+                100: "#ddd8f6",
+                200: "#bdb2ee",
+                300: "#9b89e3",
+                400: "#7c63d8",
+                500: "#6347c9",
+                600: "#5338b2",
+                700: "#432c94",
+                800: "#362478",
+                900: "#2b1d60",
+              },
+              gold: {
+                50: "#fefcf0",
+                100: "#fdf6d3",
+                200: "#fbeaa6",
+                300: "#f8d96e",
+                400: "#f4c430",
+                500: "#e6af0e",
+                600: "#c98f09",
+                700: "#a16d0b",
+                800: "#855710",
+                900: "#714813",
+              },
+              teal: {
+                50: "#eefcfa",
+                100: "#d5f7f2",
+                200: "#aeefe7",
+                300: "#78e1d6",
+                400: "#42ccc0",
+                500: "#28b0a6",
+                600: "#1e8e87",
+                700: "#1c726d",
+                800: "#1b5b58",
+                900: "#1a4b49",
+              },
+              warm: {
+                300: "#d6cfc4",
+                400: "#b8ae9e",
+                500: "#9a8e7c",
+                600: "#7d715f",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(99, 71, 201, 0.3) transparent;
+      }
+
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(99, 71, 201, 0.3); border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(99, 71, 201, 0.5); }
+
+      body {
+        background: #0f0d0b;
+        color: #d6cfc4;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(50px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        33% { transform: translateY(-18px) rotate(0.5deg); }
+        66% { transform: translateY(-10px) rotate(-0.5deg); }
+      }
+      @keyframes grid-pulse {
+        0%, 100% { opacity: 0.025; }
+        50% { opacity: 0.05; }
+      }
+
+      .animate-float { animation: float 10s ease-in-out infinite; }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #9b89e3 0%, #7c63d8 35%, #42ccc0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .gradient-text-warm {
+        background: linear-gradient(135deg, #f4c430 0%, #e6af0e 50%, #c98f09 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .glass-card {
+        background: rgba(26, 24, 22, 0.65);
+        backdrop-filter: blur(24px) saturate(1.3);
+        -webkit-backdrop-filter: blur(24px) saturate(1.3);
+        border: 1px solid rgba(214, 207, 196, 0.06);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.02),
+          0 4px 24px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+
+      .glass-card-elevated {
+        background: rgba(26, 24, 22, 0.75);
+        backdrop-filter: blur(32px) saturate(1.4);
+        -webkit-backdrop-filter: blur(32px) saturate(1.4);
+        border: 1px solid rgba(99, 71, 201, 0.12);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.03),
+          0 8px 40px rgba(0, 0, 0, 0.55),
+          0 0 80px rgba(99, 71, 201, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+
+      .card-hover {
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-6px);
+        border-color: rgba(99, 71, 201, 0.25);
+        box-shadow:
+          0 0 0 1px rgba(99, 71, 201, 0.12),
+          0 20px 60px rgba(0, 0, 0, 0.45),
+          0 0 40px rgba(99, 71, 201, 0.06);
+      }
+
+      .glow-line {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(99, 71, 201, 0.3), rgba(244, 196, 48, 0.15), transparent);
+      }
+
+      .mesh-dark {
+        background:
+          radial-gradient(ellipse 80% 60% at 20% 30%, rgba(99, 71, 201, 0.05) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 80% 70%, rgba(66, 204, 192, 0.03) 0%, transparent 60%),
+          radial-gradient(ellipse 50% 40% at 50% 50%, rgba(244, 196, 48, 0.02) 0%, transparent 60%);
+      }
+
+      .noise-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.02;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .grid-bg {
+        background-image:
+          linear-gradient(rgba(99, 71, 201, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(99, 71, 201, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        animation: grid-pulse 6s ease-in-out infinite;
+      }
+
+      .icon-glow {
+        position: relative;
+      }
+      .icon-glow::after {
+        content: "";
+        position: absolute;
+        inset: -6px;
+        border-radius: inherit;
+        background: inherit;
+        opacity: 0.3;
+        filter: blur(12px);
+        z-index: -1;
+      }
+
+      .tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .focus-ring:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(99, 71, 201, 0.5);
+      }
+
+      .timeline-connector {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(180deg, rgba(99, 71, 201, 0.3), rgba(66, 204, 192, 0.2), rgba(244, 196, 48, 0.15), rgba(99, 71, 201, 0.1));
+      }
+
+      .section-reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .section-reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .pyramid-level {
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .pyramid-level:hover {
+        transform: scale(1.03);
+        filter: brightness(1.15);
+      }
+
+      .nav-active {
+        color: #9b89e3 !important;
+        background: rgba(99, 71, 201, 0.1);
+      }
+    </style>
+  </head>
+  <body class="font-body relative overflow-x-hidden">
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50">
+      <div class="glass-card border-b border-pri-500/8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pri-500 to-pri-600 flex items-center justify-center shadow-lg shadow-pri-500/25 icon-glow">
+                  <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(255,255,255,0.15)" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <span class="font-display font-semibold text-lg text-base-50 tracking-tight">循证医学</span>
+                <span class="hidden sm:inline tag text-pri-300/60 ml-2">EBM</span>
+              </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-1">
+              <a href="#about" class="nav-link px-4 py-2 rounded-lg text-sm text-warm-400 hover:text-pri-300 hover:bg-pri-500/10 transition-all duration-300">什么是循证医学</a>
+              <a href="#elements" class="nav-link px-4 py-2 rounded-lg text-sm text-warm-400 hover:text-pri-300 hover:bg-pri-500/10 transition-all duration-300">核心要素</a>
+              <a href="#application" class="nav-link px-4 py-2 rounded-lg text-sm text-warm-400 hover:text-pri-300 hover:bg-pri-500/10 transition-all duration-300">就医运用</a>
+              <a href="#ai" class="nav-link px-4 py-2 rounded-lg text-sm text-warm-400 hover:text-pri-300 hover:bg-pri-500/10 transition-all duration-300">AI助力</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl hover:bg-white/5 transition-all duration-200 focus-ring" aria-label="菜单">
+              <svg class="w-5 h-5 text-warm-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+          </div>
+
+          <div id="mobile-menu" class="hidden md:hidden pb-4">
+            <div class="flex flex-col gap-1 pt-2 border-t border-white/5">
+              <a href="#about" class="px-4 py-2.5 rounded-lg text-sm text-warm-400 hover:text-pri-300 hover:bg-pri-500/10 transition-all duration-200">什么是循证医学</a>
+              <a href="#elements" class="px-4 py-2.5 rounded-lg text-sm text-warm-400 hover:text-pri-300 hover:bg-pri-500/10 transition-all duration-200">核心要素</a>
+              <a href="#application" class="px-4 py-2.5 rounded-lg text-sm text-warm-400 hover:text-pri-300 hover:bg-pri-500/10 transition-all duration-200">就医运用</a>
+              <a href="#ai" class="px-4 py-2.5 rounded-lg text-sm text-warm-400 hover:text-pri-300 hover:bg-pri-500/10 transition-all duration-200">AI助力</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative overflow-hidden pt-16">
+      <div class="absolute inset-0 mesh-dark"></div>
+      <div class="absolute inset-0 grid-bg"></div>
+
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-32 right-[10%] w-80 h-80 bg-pri-500/8 rounded-full blur-[100px] animate-float"></div>
+        <div class="absolute bottom-40 left-[5%] w-96 h-96 bg-teal-500/6 rounded-full blur-[120px] animate-float" style="animation-delay: -4s"></div>
+        <div class="absolute top-1/2 right-1/3 w-52 h-52 bg-gold-500/5 rounded-full blur-[80px] animate-float" style="animation-delay: -7s"></div>
+      </div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="space-y-8 section-reveal">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-pri-400/20 bg-pri-500/5 text-pri-300">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pri-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-pri-400"></span>
+              </span>
+              <span class="tag">科学决策 · 理性就医 · 智慧健康</span>
+            </div>
+
+            <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
+              <span class="gradient-text">循证医学</span>
+              <br />
+              <span class="text-base-50">让医疗决策</span>
+              <br />
+              <span class="text-base-50/75">更科学</span>
+            </h1>
+
+            <p class="text-lg sm:text-xl text-warm-400 leading-relaxed max-w-xl">
+              循证医学是将<span class="text-pri-300 font-medium">最佳研究证据</span>、<span class="text-teal-400 font-medium">临床专业知识</span>与<span class="text-gold-400 font-medium">患者价值观</span>三者有机结合，帮助您做出更明智的医疗选择。
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="#about" class="group inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-pri-500 to-pri-600 text-white font-display font-semibold shadow-lg shadow-pri-500/25 hover:shadow-xl hover:shadow-pri-500/35 transition-all duration-300 hover:-translate-y-0.5">
+                开始了解
+                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                </svg>
+              </a>
+              <a href="#application" class="inline-flex items-center justify-center px-8 py-4 rounded-xl border border-warm-500/20 text-warm-300 font-display font-medium hover:border-pri-400/30 hover:text-pri-300 hover:bg-pri-500/5 transition-all duration-300">
+                就医指南
+              </a>
+            </div>
+
+            <div class="flex items-center gap-8 pt-4">
+              <div class="text-center">
+                <div class="text-3xl font-display font-bold text-pri-300">30+</div>
+                <div class="text-xs text-warm-500 tag mt-1">年发展历程</div>
+              </div>
+              <div class="w-px h-12 bg-warm-500/15"></div>
+              <div class="text-center">
+                <div class="text-3xl font-display font-bold text-teal-400">全球</div>
+                <div class="text-xs text-warm-500 tag mt-1">医疗标准</div>
+              </div>
+              <div class="w-px h-12 bg-warm-500/15"></div>
+              <div class="text-center">
+                <div class="text-3xl font-display font-bold text-gold-400">AI</div>
+                <div class="text-xs text-warm-500 tag mt-1">智慧赋能</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Evidence Pyramid -->
+          <div class="relative hidden lg:block section-reveal" style="transition-delay: 0.2s">
+            <div class="relative w-full max-w-md mx-auto">
+              <div class="absolute inset-0 bg-gradient-to-br from-pri-500/8 to-teal-500/4 rounded-3xl blur-3xl"></div>
+
+              <div class="relative glass-card-elevated rounded-3xl p-8">
+                <div class="flex items-center justify-between mb-8">
+                  <h3 class="text-sm font-display font-medium text-warm-300">证据等级金字塔</h3>
+                  <span class="tag text-pri-300/50 px-2 py-1 rounded bg-pri-500/8">HIERARCHY</span>
+                </div>
+
+                <div class="space-y-2.5">
+                  <div class="pyramid-level flex items-center justify-center">
+                    <div class="w-36 py-3.5 bg-gradient-to-r from-pri-500 to-pri-600 rounded-lg text-white text-center shadow-lg shadow-pri-500/25 border border-pri-400/25">
+                      <div class="tag opacity-70">Level 1</div>
+                      <div class="text-sm font-display font-semibold mt-0.5">系统评价</div>
+                    </div>
+                  </div>
+                  <div class="pyramid-level flex items-center justify-center">
+                    <div class="w-48 py-3.5 bg-gradient-to-r from-pri-600 to-pri-700 rounded-lg text-pri-100 text-center shadow-md border border-pri-500/20">
+                      <div class="tag opacity-70">Level 2</div>
+                      <div class="text-sm font-display font-semibold mt-0.5">随机对照试验</div>
+                    </div>
+                  </div>
+                  <div class="pyramid-level flex items-center justify-center">
+                    <div class="w-60 py-3.5 bg-gradient-to-r from-teal-600 to-teal-700 rounded-lg text-teal-100 text-center shadow-md border border-teal-500/20">
+                      <div class="tag opacity-70">Level 3</div>
+                      <div class="text-sm font-display font-semibold mt-0.5">队列研究 / 病例对照</div>
+                    </div>
+                  </div>
+                  <div class="pyramid-level flex items-center justify-center">
+                    <div class="w-72 py-3.5 bg-gradient-to-r from-teal-700 to-teal-800 rounded-lg text-teal-200 text-center shadow-md border border-teal-600/15">
+                      <div class="tag opacity-60">Level 4</div>
+                      <div class="text-sm font-display font-semibold mt-0.5">病例系列 / 病例报告</div>
+                    </div>
+                  </div>
+                  <div class="pyramid-level flex items-center justify-center">
+                    <div class="w-80 py-3.5 bg-gradient-to-r from-base-800 to-base-850 rounded-lg text-warm-400 text-center shadow-md border border-warm-500/10">
+                      <div class="tag opacity-50">Level 5</div>
+                      <div class="text-sm font-display font-semibold mt-0.5">专家意见 / 机制推理</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex justify-between mt-8 text-xs text-warm-500">
+                  <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-pri-400 shadow-sm shadow-pri-400/50"></span>
+                    高质量证据
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    低质量证据
+                    <span class="w-2 h-2 rounded-full bg-warm-500"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div class="flex flex-col items-center gap-2 text-warm-500">
+          <span class="tag">向下滚动</span>
+          <svg class="w-5 h-5 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 lg:py-32 relative overflow-hidden">
+      <div class="absolute inset-0 mesh-dark"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="space-y-6 section-reveal">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-pri-400/20 bg-pri-500/5 text-pri-300">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+              <span class="tag">认识循证医学</span>
+            </div>
+
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-base-50 leading-tight tracking-tight">
+              什么是<span class="gradient-text">循证医学</span>？
+            </h2>
+
+            <div class="space-y-4 text-warm-400 leading-relaxed">
+              <p>
+                <strong class="text-base-50">循证医学（Evidence-Based Medicine, EBM）</strong>是一种医疗实践方法，它强调在做出医疗决策时，应当结合当前可获得的<span class="text-pri-300 font-medium">最佳科学证据</span>。
+              </p>
+              <p>
+                这一理念由加拿大临床流行病学家<span class="text-teal-400 font-semibold">David Sackett</span>教授于1992年正式提出，如今已成为全球医疗实践的金标准。
+              </p>
+              <p>
+                循证医学的核心在于：<span class="text-gold-400 font-medium">不盲从经验，不迷信权威</span>，而是用科学的方法寻找最佳证据，为每一位患者提供最适合的治疗方案。
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 pt-4">
+              <div class="glass-card rounded-2xl p-5 border-pri-500/10">
+                <div class="text-3xl font-display font-bold text-pri-300">1992</div>
+                <div class="text-sm text-warm-500 mt-1">正式提出概念</div>
+              </div>
+              <div class="glass-card rounded-2xl p-5 border-teal-500/10">
+                <div class="text-3xl font-display font-bold text-teal-400">100+</div>
+                <div class="text-sm text-warm-500 mt-1">国家广泛应用</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative section-reveal" style="transition-delay: 0.15s">
+            <div class="glass-card-elevated rounded-3xl p-8 card-hover">
+              <div class="flex items-center justify-between mb-8">
+                <h3 class="font-display text-xl font-semibold text-base-50">循证医学的核心理念</h3>
+                <span class="tag text-teal-400/50 px-2 py-1 rounded bg-teal-500/8">CORE</span>
+              </div>
+
+              <div class="space-y-5">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-pri-500/5 border border-pri-500/8 transition-all duration-300 hover:bg-pri-500/8 hover:border-pri-500/15">
+                  <div class="icon-glow flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-pri-500 to-pri-600 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="font-display font-semibold text-base-50">证据为本</h4>
+                    <p class="text-sm text-warm-400 mt-1">基于高质量研究证据，而非个人经验或传统做法</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-teal-500/5 border border-teal-500/8 transition-all duration-300 hover:bg-teal-500/8 hover:border-teal-500/15">
+                  <div class="icon-glow flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="font-display font-semibold text-base-50">医患共决策</h4>
+                    <p class="text-sm text-warm-400 mt-1">尊重患者的价值观和偏好，共同制定治疗方案</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-gold-500/5 border border-gold-500/8 transition-all duration-300 hover:bg-gold-500/8 hover:border-gold-500/15">
+                  <div class="icon-glow flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="23 4 23 10 17 10" /><polyline points="1 20 1 14 7 14" />
+                      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="font-display font-semibold text-base-50">持续更新</h4>
+                    <p class="text-sm text-warm-400 mt-1">随着新证据出现，不断更新医疗实践指南</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- Core Elements Section -->
+    <section id="elements" class="py-24 lg:py-32 relative">
+      <div class="absolute inset-0 mesh-dark"></div>
+      <div class="absolute inset-0 grid-bg"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 section-reveal">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-teal-400/20 bg-teal-500/5 text-teal-300 mb-4">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" />
+            </svg>
+            <span class="tag">核心三要素</span>
+          </div>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-base-50 mb-4 tracking-tight">
+            循证医学的<span class="gradient-text">三大支柱</span>
+          </h2>
+          <p class="text-warm-400 text-lg">循证医学决策需要综合考虑三个核心要素，缺一不可</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Evidence Card -->
+          <div class="group relative section-reveal">
+            <div class="absolute inset-0 bg-gradient-to-br from-pri-500/15 to-pri-600/5 rounded-3xl transform rotate-1 group-hover:rotate-0 transition-transform duration-500 blur-sm"></div>
+            <div class="relative glass-card-elevated rounded-3xl p-8 h-full card-hover">
+              <div class="icon-glow w-16 h-16 rounded-2xl bg-gradient-to-br from-pri-500 to-pri-600 flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <span class="tag text-pri-300/40 mb-3 block">01 / EVIDENCE</span>
+              <h3 class="font-display text-xl font-semibold text-base-50 mb-4">最佳研究证据</h3>
+              <p class="text-warm-400 mb-6 leading-relaxed text-sm">来自系统评价、随机对照试验等高质量研究的科学证据，是医疗决策的基础。</p>
+              <div class="space-y-2.5">
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-pri-500/5 border border-pri-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pri-400 shadow-sm shadow-pri-400/50"></span>
+                  <span class="text-warm-300">系统评价与Meta分析</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-pri-500/5 border border-pri-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pri-400 shadow-sm shadow-pri-400/50"></span>
+                  <span class="text-warm-300">随机对照试验（RCT）</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-pri-500/5 border border-pri-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pri-400 shadow-sm shadow-pri-400/50"></span>
+                  <span class="text-warm-300">Cochrane协作网</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clinical Expertise Card -->
+          <div class="group relative section-reveal" style="transition-delay: 0.1s">
+            <div class="absolute inset-0 bg-gradient-to-br from-teal-500/15 to-teal-600/5 rounded-3xl transform -rotate-1 group-hover:rotate-0 transition-transform duration-500 blur-sm"></div>
+            <div class="relative glass-card-elevated rounded-3xl p-8 h-full card-hover">
+              <div class="icon-glow w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              </div>
+              <span class="tag text-teal-400/40 mb-3 block">02 / EXPERTISE</span>
+              <h3 class="font-display text-xl font-semibold text-base-50 mb-4">临床专业知识</h3>
+              <p class="text-warm-400 mb-6 leading-relaxed text-sm">医生通过多年临床实践积累的经验和技能，在解读证据和制定方案中不可或缺。</p>
+              <div class="space-y-2.5">
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-teal-500/5 border border-teal-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-sm shadow-teal-400/50"></span>
+                  <span class="text-warm-300">诊断能力与临床判断</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-teal-500/5 border border-teal-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-sm shadow-teal-400/50"></span>
+                  <span class="text-warm-300">操作技术与沟通技巧</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-teal-500/5 border border-teal-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-sm shadow-teal-400/50"></span>
+                  <span class="text-warm-300">持续学习与专业发展</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Patient Values Card -->
+          <div class="group relative section-reveal" style="transition-delay: 0.2s">
+            <div class="absolute inset-0 bg-gradient-to-br from-gold-500/15 to-gold-600/5 rounded-3xl transform rotate-1 group-hover:rotate-0 transition-transform duration-500 blur-sm"></div>
+            <div class="relative glass-card-elevated rounded-3xl p-8 h-full card-hover">
+              <div class="icon-glow w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center mb-6">
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              </div>
+              <span class="tag text-gold-400/40 mb-3 block">03 / VALUES</span>
+              <h3 class="font-display text-xl font-semibold text-base-50 mb-4">患者价值观</h3>
+              <p class="text-warm-400 mb-6 leading-relaxed text-sm">每位患者都有独特的需求、偏好和价值观，这些都应纳入医疗决策考量。</p>
+              <div class="space-y-2.5">
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-gold-500/5 border border-gold-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-gold-400 shadow-sm shadow-gold-400/50"></span>
+                  <span class="text-warm-300">个人健康信念与期望</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-gold-500/5 border border-gold-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-gold-400 shadow-sm shadow-gold-400/50"></span>
+                  <span class="text-warm-300">生活方式与经济条件</span>
+                </div>
+                <div class="flex items-center gap-3 text-sm p-2.5 rounded-lg bg-gold-500/5 border border-gold-500/8">
+                  <span class="w-1.5 h-1.5 rounded-full bg-gold-400 shadow-sm shadow-gold-400/50"></span>
+                  <span class="text-warm-300">知情同意与共同决策</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- Application Section -->
+    <section id="application" class="py-24 lg:py-32 relative overflow-hidden">
+      <div class="absolute inset-0 mesh-dark"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 section-reveal">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold-500/20 bg-gold-500/5 text-gold-300 mb-4">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
+            <span class="tag">实践指南</span>
+          </div>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-base-50 mb-4 tracking-tight">
+            如何在就医中运用<span class="gradient-text-warm">循证思维</span>
+          </h2>
+          <p class="text-warm-400 text-lg">掌握这四个步骤，让每一次就医都更加科学和高效</p>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto">
+          <div class="hidden sm:block timeline-connector"></div>
+
+          <div class="space-y-16">
+            <!-- Step 1 -->
+            <div class="relative sm:grid sm:grid-cols-2 sm:gap-8 lg:gap-12 items-start section-reveal">
+              <div class="glass-card rounded-2xl p-6 sm:pr-8 lg:pr-12 order-2 sm:order-1 card-hover border-pri-500/8">
+                <h4 class="font-display font-medium text-base-50 mb-4 flex items-center gap-2">
+                  <svg class="w-5 h-5 text-pri-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  可靠信息来源
+                </h4>
+                <ul class="space-y-3 text-sm text-warm-400">
+                  <li class="flex items-start gap-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-pri-400 mt-2 flex-shrink-0 shadow-sm shadow-pri-400/50"></span>
+                    <span>Cochrane Library（考克兰图书馆）</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-pri-400 mt-2 flex-shrink-0 shadow-sm shadow-pri-400/50"></span>
+                    <span>WHO/NICE国际临床指南</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-pri-400 mt-2 flex-shrink-0 shadow-sm shadow-pri-400/50"></span>
+                    <span>UpToDate临床决策系统</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="w-1.5 h-1.5 rounded-full bg-pri-400 mt-2 flex-shrink-0 shadow-sm shadow-pri-400/50"></span>
+                    <span>PubMed医学文献数据库</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-pri-500 to-pri-600 items-center justify-center text-white font-display font-bold shadow-lg shadow-pri-500/30 z-10 border border-pri-400/25">1</div>
+
+              <div class="sm:pl-8 lg:pl-12 order-1 sm:order-2 mb-6 sm:mb-0">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="sm:hidden w-10 h-10 rounded-full bg-gradient-to-br from-pri-500 to-pri-600 flex items-center justify-center text-white font-display font-bold shadow-lg shadow-pri-500/25">1</div>
+                  <h3 class="font-display text-xl font-semibold text-base-50">就诊前：做好准备</h3>
+                </div>
+                <p class="text-warm-400 leading-relaxed">在就医前，学习使用可靠的医学信息来源，了解自己的健康状况，准备好与医生讨论的问题清单。</p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="relative sm:grid sm:grid-cols-2 sm:gap-8 lg:gap-12 items-start section-reveal">
+              <div class="sm:text-right mb-6 sm:mb-0 sm:pr-8 lg:pr-12 order-2 sm:order-1">
+                <div class="glass-card rounded-2xl p-6 card-hover border-teal-500/8">
+                  <h4 class="font-display font-medium text-base-50 mb-4 flex items-center gap-2 sm:justify-end">
+                    <svg class="w-5 h-5 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                    关键问题清单
+                  </h4>
+                  <ul class="space-y-3 text-sm text-warm-400">
+                    <li class="flex items-center gap-3 sm:flex-row-reverse">
+                      <span class="w-1.5 h-1.5 rounded-full bg-teal-400 flex-shrink-0 shadow-sm shadow-teal-400/50"></span>
+                      <span>"这个诊断基于什么证据？"</span>
+                    </li>
+                    <li class="flex items-center gap-3 sm:flex-row-reverse">
+                      <span class="w-1.5 h-1.5 rounded-full bg-teal-400 flex-shrink-0 shadow-sm shadow-teal-400/50"></span>
+                      <span>"有没有其他治疗方案？"</span>
+                    </li>
+                    <li class="flex items-center gap-3 sm:flex-row-reverse">
+                      <span class="w-1.5 h-1.5 rounded-full bg-teal-400 flex-shrink-0 shadow-sm shadow-teal-400/50"></span>
+                      <span>"不治疗会怎样？"</span>
+                    </li>
+                    <li class="flex items-center gap-3 sm:flex-row-reverse">
+                      <span class="w-1.5 h-1.5 rounded-full bg-teal-400 flex-shrink-0 shadow-sm shadow-teal-400/50"></span>
+                      <span>"这个检查对治疗决策有影响吗？"</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 items-center justify-center text-white font-display font-bold shadow-lg shadow-teal-500/30 z-10 border border-teal-400/25">2</div>
+
+              <div class="sm:pl-8 lg:pl-12 order-1 sm:order-2 mb-6 sm:mb-0">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="sm:hidden w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center text-white font-display font-bold shadow-lg shadow-teal-500/25">2</div>
+                  <h3 class="font-display text-xl font-semibold text-base-50">就诊时：有效沟通</h3>
+                </div>
+                <p class="text-warm-400 leading-relaxed">与医生进行循证对话，了解诊断依据、治疗方案的选择理由。不要害怕提问，好的医生会欢迎患者参与决策过程。</p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="relative sm:grid sm:grid-cols-2 sm:gap-8 lg:gap-12 items-start section-reveal">
+              <div class="sm:text-right mb-6 sm:mb-0 sm:pr-8 lg:pr-12">
+                <div class="flex items-center gap-4 sm:justify-end mb-4">
+                  <div class="sm:hidden w-10 h-10 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center text-white font-display font-bold shadow-lg shadow-gold-500/25">3</div>
+                  <h3 class="font-display text-xl font-semibold text-base-50">决策时：共同参与</h3>
+                </div>
+                <p class="text-warm-400 leading-relaxed">在充分了解各种选择后，结合自己的价值观、生活方式和经济状况，与医生共同做出最适合你的决策。</p>
+              </div>
+
+              <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-gold-500 to-gold-600 items-center justify-center text-white font-display font-bold shadow-lg shadow-gold-500/30 z-10 border border-gold-400/25">3</div>
+
+              <div class="glass-card rounded-2xl p-6 sm:pl-8 lg:pl-12 card-hover border-gold-500/8">
+                <h4 class="font-display font-medium text-base-50 mb-4 flex items-center gap-2">
+                  <svg class="w-5 h-5 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="21" x2="9" y2="9" />
+                  </svg>
+                  决策考量因素
+                </h4>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                  <div class="p-4 rounded-xl bg-pri-500/5 border border-pri-500/8">
+                    <div class="font-display font-medium text-pri-300">治疗效果</div>
+                    <div class="text-warm-500 text-xs mt-1">预期获益有多大？</div>
+                  </div>
+                  <div class="p-4 rounded-xl bg-teal-500/5 border border-teal-500/8">
+                    <div class="font-display font-medium text-teal-300">风险副作用</div>
+                    <div class="text-warm-500 text-xs mt-1">可能的危害是什么？</div>
+                  </div>
+                  <div class="p-4 rounded-xl bg-gold-500/5 border border-gold-500/8">
+                    <div class="font-display font-medium text-gold-300">生活影响</div>
+                    <div class="text-warm-500 text-xs mt-1">对日常生活的改变？</div>
+                  </div>
+                  <div class="p-4 rounded-xl bg-base-800/60 border border-warm-500/8">
+                    <div class="font-display font-medium text-warm-300">经济成本</div>
+                    <div class="text-warm-500 text-xs mt-1">能否承担相关费用？</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="relative sm:grid sm:grid-cols-2 sm:gap-8 lg:gap-12 items-start section-reveal">
+              <div class="glass-card rounded-2xl p-6 sm:pr-8 lg:pr-12 order-2 sm:order-1 card-hover border-pri-500/8">
+                <h4 class="font-display font-medium text-base-50 mb-4 flex items-center gap-2">
+                  <svg class="w-5 h-5 text-pri-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                  </svg>
+                  随访要点
+                </h4>
+                <ul class="space-y-3 text-sm text-warm-400">
+                  <li class="flex items-start gap-3">
+                    <svg class="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    <span>按时服药，记录任何不良反应</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    <span>定期复查，监测治疗效果</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    <span>如有疑问及时与医生沟通</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <svg class="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    <span>关注新的治疗选择和研究进展</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="hidden sm:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-gradient-to-br from-pri-500 to-teal-500 items-center justify-center text-white font-display font-bold shadow-lg shadow-pri-500/25 z-10 border border-pri-400/20">4</div>
+
+              <div class="sm:pl-8 lg:pl-12 order-1 sm:order-2 mb-6 sm:mb-0">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="sm:hidden w-10 h-10 rounded-full bg-gradient-to-br from-pri-500 to-teal-500 flex items-center justify-center text-white font-display font-bold shadow-lg shadow-pri-500/25">4</div>
+                  <h3 class="font-display text-xl font-semibold text-base-50">治疗后：持续跟进</h3>
+                </div>
+                <p class="text-warm-400 leading-relaxed">循证医学是一个持续的过程。治疗后需要评估效果，根据实际情况调整方案，形成完整的循证闭环。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- AI Section -->
+    <section id="ai" class="py-24 lg:py-32 relative overflow-hidden">
+      <div class="absolute inset-0 mesh-dark"></div>
+      <div class="absolute inset-0 grid-bg"></div>
+      <div class="absolute top-1/4 right-0 w-[500px] h-[500px] bg-pri-500/4 rounded-full blur-[150px]"></div>
+      <div class="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-teal-500/4 rounded-full blur-[120px]"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 section-reveal">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-pri-400/20 bg-pri-500/5 text-pri-300 mb-4">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pri-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-pri-400"></span>
+            </span>
+            <span class="tag">AI赋能</span>
+          </div>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-base-50 mb-4 tracking-tight">
+            <span class="gradient-text">人工智能</span>助力循证医学
+          </h2>
+          <p class="text-warm-400 text-lg">AI技术正在革新循证医学实践，让高质量医疗信息触手可及</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+          <div class="space-y-6 section-reveal">
+            <div class="glass-card rounded-2xl p-6 card-hover border-pri-500/8">
+              <div class="flex items-start gap-5">
+                <div class="icon-glow flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-pri-500 to-pri-600 flex items-center justify-center">
+                  <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="11" y1="8" x2="11" y2="14" /><line x1="8" y1="11" x2="14" y2="11" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-display text-lg font-semibold text-base-50 mb-2">智能文献检索</h3>
+                  <p class="text-warm-400 text-sm leading-relaxed">AI可以快速检索和分析海量医学文献，帮助医生和患者在短时间内获取最新的研究证据，大大提高信息获取效率。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 card-hover border-teal-500/8">
+              <div class="flex items-start gap-5">
+                <div class="icon-glow flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center">
+                  <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" /><line x1="2" y1="20" x2="22" y2="20" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-display text-lg font-semibold text-base-50 mb-2">证据质量评估</h3>
+                  <p class="text-warm-400 text-sm leading-relaxed">利用自然语言处理技术，AI可以自动评估研究证据的质量等级，识别潜在的偏倚风险，帮助用户判断证据的可靠性。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 card-hover border-gold-500/8">
+              <div class="flex items-start gap-5">
+                <div class="icon-glow flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-gold-500 to-gold-600 flex items-center justify-center">
+                  <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    <line x1="8" y1="9" x2="16" y2="9" /><line x1="8" y1="13" x2="14" y2="13" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-display text-lg font-semibold text-base-50 mb-2">个性化健康咨询</h3>
+                  <p class="text-warm-400 text-sm leading-relaxed">AI健康助手可以基于个人健康数据，提供个性化的健康建议，帮助用户更好地理解医学信息，为医患沟通做好准备。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6 section-reveal" style="transition-delay: 0.15s">
+            <!-- AI Chat Demo -->
+            <div class="glass-card-elevated rounded-3xl p-6 shadow-2xl">
+              <div class="flex items-center gap-3 mb-6 pb-4 border-b border-warm-500/8">
+                <div class="relative">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pri-500 to-teal-500 flex items-center justify-center shadow-lg shadow-pri-500/25 icon-glow">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" /><circle cx="15.5" cy="8.5" r="1.5" />
+                      <path d="M9 15c.83 1.67 2.17 2.5 4 2.5s3.17-.83 4-2.5" />
+                    </svg>
+                  </div>
+                  <div class="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-teal-500 rounded-full border-2 border-base-900"></div>
+                </div>
+                <div>
+                  <div class="font-display font-semibold text-base-50">AI健康助手</div>
+                  <div class="text-xs text-warm-500 font-mono">基于循证医学知识库 · <span class="text-teal-400">在线</span></div>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex justify-end">
+                  <div class="max-w-xs px-5 py-3 rounded-2xl rounded-br-md bg-gradient-to-r from-pri-500 to-pri-600 text-white text-sm shadow-md shadow-pri-500/20">
+                    高血压患者应该如何选择降压药？
+                  </div>
+                </div>
+
+                <div class="flex justify-start">
+                  <div class="max-w-sm px-5 py-4 rounded-2xl rounded-bl-md bg-white/[0.03] border border-warm-500/8 text-sm text-warm-300 shadow-sm">
+                    <p class="mb-3 font-display font-medium text-base-50">根据最新循证指南，降压药选择需考虑以下因素：</p>
+                    <ul class="text-xs space-y-2 text-warm-400">
+                      <li class="flex items-start gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-pri-400 mt-1.5 flex-shrink-0"></span>
+                        <span><strong class="text-pri-300">一线药物：</strong>ACEI/ARB、CCB、噻嗪类利尿剂</span>
+                      </li>
+                      <li class="flex items-start gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-teal-400 mt-1.5 flex-shrink-0"></span>
+                        <span><strong class="text-teal-300">证据等级：</strong>多项RCT和Meta分析支持</span>
+                      </li>
+                      <li class="flex items-start gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-gold-400 mt-1.5 flex-shrink-0"></span>
+                        <span><strong class="text-gold-300">个体化：</strong>需结合合并症、年龄等因素</span>
+                      </li>
+                    </ul>
+                    <div class="mt-3 pt-3 border-t border-warm-500/8">
+                      <a href="#" class="text-xs text-pri-300 font-display font-medium hover:text-pri-200 transition-colors">建议与医生讨论具体方案 →</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Stats -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="glass-card rounded-2xl p-5 text-center card-hover">
+                <div class="text-3xl font-display font-bold gradient-text mb-1">10x</div>
+                <div class="text-xs text-warm-500 tag">文献检索效率</div>
+              </div>
+              <div class="glass-card rounded-2xl p-5 text-center card-hover">
+                <div class="text-3xl font-display font-bold gradient-text mb-1">24/7</div>
+                <div class="text-xs text-warm-500 tag">全天候咨询</div>
+              </div>
+              <div class="glass-card rounded-2xl p-5 text-center card-hover">
+                <div class="text-3xl font-display font-bold gradient-text mb-1">精准</div>
+                <div class="text-xs text-warm-500 tag">个性化建议</div>
+              </div>
+              <div class="glass-card rounded-2xl p-5 text-center card-hover">
+                <div class="text-3xl font-display font-bold gradient-text mb-1">实时</div>
+                <div class="text-xs text-warm-500 tag">最新研究</div>
+              </div>
+            </div>
+
+            <!-- Caution -->
+            <div class="p-5 rounded-2xl border border-gold-600/15 bg-gold-500/[0.03]">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gold-500/8 border border-gold-500/12 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-display font-semibold text-gold-300 text-sm">重要提醒</h4>
+                  <p class="text-xs text-gold-400/60 mt-1 leading-relaxed">AI工具仅作为辅助参考，不能替代专业医生的诊断和建议。任何医疗决策都应在医生指导下进行。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="glow-line"></div>
+
+    <!-- Summary / CTA Section -->
+    <section class="py-24 lg:py-32 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-base-950 via-base-900 to-base-950"></div>
+      <div class="absolute inset-0 grid-bg"></div>
+      <div class="absolute inset-0 mesh-dark"></div>
+
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none opacity-15">
+        <div class="absolute inset-0 rounded-full border border-pri-500/20"></div>
+        <div class="absolute inset-8 rounded-full border border-teal-500/15"></div>
+        <div class="absolute inset-16 rounded-full border border-gold-500/10"></div>
+      </div>
+
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center section-reveal">
+        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-base-50 mb-6 leading-tight tracking-tight">
+          循证医学<br class="sm:hidden" />让健康决策更科学
+        </h2>
+        <p class="text-lg text-warm-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          掌握循证思维，善用AI工具，与医生建立伙伴关系，为自己的健康做出明智选择。
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <a href="#about" class="group inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-pri-500 to-pri-600 text-white font-display font-semibold shadow-xl shadow-pri-500/20 hover:shadow-2xl hover:shadow-pri-500/30 transition-all duration-300 hover:-translate-y-0.5">
+            重新开始学习
+            <svg class="w-5 h-5 ml-2 group-hover:-translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </a>
+          <a href="#application" class="inline-flex items-center justify-center px-8 py-4 rounded-xl border border-warm-500/15 text-warm-300 font-display font-semibold hover:bg-white/[0.03] hover:border-pri-400/25 transition-all duration-300">
+            就医实践指南
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-8 max-w-lg mx-auto">
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-pri-500/8 border border-pri-500/12 flex items-center justify-center">
+              <svg class="w-8 h-8 text-pri-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+            </div>
+            <div class="text-xl font-display font-bold text-base-50">证据</div>
+            <div class="text-xs text-warm-500 tag mt-1">科学为本</div>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-teal-500/8 border border-teal-500/12 flex items-center justify-center">
+              <svg class="w-8 h-8 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            </div>
+            <div class="text-xl font-display font-bold text-base-50">经验</div>
+            <div class="text-xs text-warm-500 tag mt-1">专业支撑</div>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-gold-500/8 border border-gold-500/12 flex items-center justify-center">
+              <svg class="w-8 h-8 text-gold-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </div>
+            <div class="text-xl font-display font-bold text-base-50">患者</div>
+            <div class="text-xs text-warm-500 tag mt-1">价值导向</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 relative" style="background: #0a0908">
+      <div class="glow-line mb-12"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pri-500 to-teal-500 flex items-center justify-center shadow-lg shadow-pri-500/15 icon-glow">
+              <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><path d="M9 12l2 2 4-4" />
+              </svg>
+            </div>
+            <div>
+              <span class="font-display font-semibold text-base-50">循证医学</span>
+              <span class="hidden sm:inline tag text-warm-600 ml-2">Evidence-Based Medicine</span>
+            </div>
+          </div>
+
+          <div class="text-sm text-center md:text-right">
+            <p class="text-warm-400">循证医学知识宣传网站</p>
+            <p class="mt-1 text-warm-600">让医疗决策更科学、更透明、更人性化</p>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-8 border-t border-warm-500/8 text-center text-xs text-warm-600">
+          <p>本站内容仅供科普教育，不构成医疗建议。如有健康问题，请咨询专业医生。</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+      );
+
+      document.querySelectorAll(".section-reveal").forEach((el) => {
+        revealObserver.observe(el);
+      });
+
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinks.forEach((link) => {
+                link.classList.remove("nav-active");
+                if (link.getAttribute("href") === "#" + entry.target.id) {
+                  link.classList.add("nav-active");
+                }
+              });
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      sections.forEach((section) => navObserver.observe(section));
+
+      if (window.matchMedia("(min-width: 1024px)").matches) {
+        document.addEventListener("mousemove", (e) => {
+          const x = (e.clientX / window.innerWidth - 0.5) * 20;
+          const y = (e.clientY / window.innerHeight - 0.5) * 20;
+          document.querySelectorAll(".animate-float").forEach((el, i) => {
+            const factor = (i + 1) * 0.4;
+            el.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
